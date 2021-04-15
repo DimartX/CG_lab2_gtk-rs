@@ -9,6 +9,7 @@ use std::cell::RefCell;
 use std;
 
 mod canvas;
+mod view;
 mod color;
 mod point;
 mod cube;
@@ -38,7 +39,17 @@ fn build_ui(app: &gtk::Application) {
                        .expect(&format!("Couldn't get button {}", name)));
     }
 
-    let state = Rc::new(RefCell::new(State::new(&buttons)));
+    let mut switch: HashMap<String, gtk::Switch> = HashMap::new();
+    for name in &["carcass", "hide_lines", "filling",] {
+        switch.insert(name.to_string(), builder.get_object(name)
+                       .expect(&format!("Couldn't get switch {}", name)));
+    }
+
+    let projection: gtk::ComboBoxText = builder.get_object("projection")
+        .expect(&format!("Couldn't get projection ComboBoxText", ));
+
+    // Create state of all buttons and other.
+    let state = Rc::new(RefCell::new(State::new(&buttons, &switch)));
 
     let drawing_area: gtk::DrawingArea = builder.get_object("drawingArea")
         .expect("Couldn't get drawingArea");
@@ -46,6 +57,8 @@ fn build_ui(app: &gtk::Application) {
 
     setup_canvas_area(&builder, &state, &drawing);
     crate::buttons_events::setup_buttons_events(&buttons, &state, &drawing);
+    crate::buttons_events::setup_switchs_events(&switch, &state, &drawing);
+    crate::buttons_events::setup_projection_events(&projection, &state, &drawing);
 
     window.set_application(Some(app));
     window.show_all();

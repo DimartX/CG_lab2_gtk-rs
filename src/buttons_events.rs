@@ -3,6 +3,7 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use crate::state::State;
+use crate::view::View;
 
 pub fn setup_buttons_events(
     buttons: &HashMap<String, gtk::SpinButton>,
@@ -114,6 +115,73 @@ pub fn setup_buttons_events(
             let mut cur_state = button_state.borrow_mut();
             let area = drawing.borrow();
             cur_state.zoom = spin_button.get_value();
+            area.queue_draw();
+        });
+    }
+}
+
+
+pub fn setup_switchs_events(
+    switch: &HashMap<String, gtk::Switch>,
+    state: &Rc<RefCell<State>>,
+    drawing_area: &Rc<RefCell<gtk::DrawingArea>>,
+) {
+
+    // 3 switch buttons
+    {
+        let button_state = Rc::clone(&state);
+        let drawing = Rc::clone(&drawing_area);
+        switch.get("carcass").unwrap().connect_changed_active(move |button| {
+            let mut cur_state = button_state.borrow_mut();
+            let area = drawing.borrow();
+            cur_state.carcass = button.get_state();
+            area.queue_draw();
+        });
+    }
+    {
+        let button_state = Rc::clone(&state);
+        let drawing = Rc::clone(&drawing_area);
+        switch.get("hide_lines").unwrap().connect_changed_active(move |button| {
+            let mut cur_state = button_state.borrow_mut();
+            let area = drawing.borrow();
+            cur_state.hide_lines = button.get_state();
+            area.queue_draw();
+        });
+    }
+    {
+        let button_state = Rc::clone(&state);
+        let drawing = Rc::clone(&drawing_area);
+        switch.get("filling").unwrap().connect_changed_active(move |button| {
+            let mut cur_state = button_state.borrow_mut();
+            let area = drawing.borrow();
+            cur_state.filling = button.get_state();
+            area.queue_draw();
+        });
+    }
+}
+
+
+pub fn setup_projection_events(
+    projection: &gtk::ComboBoxText,
+    state: &Rc<RefCell<State>>,
+    drawing_area: &Rc<RefCell<gtk::DrawingArea>>,
+) {
+
+    // 3 switch buttons
+    {
+        let button_state = Rc::clone(&state);
+        let drawing = Rc::clone(&drawing_area);
+        projection.connect_changed(move |button| {
+            let mut cur_state = button_state.borrow_mut();
+            let area = drawing.borrow();
+
+            cur_state.view =
+                match button.get_active_text().unwrap().as_str() {
+                    "Side" => View::Side,
+                    "Front" => View::Front,
+                    "Above" => View::Above,
+                    _ => View::Isometric,
+                };
             area.queue_draw();
         });
     }

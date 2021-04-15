@@ -29,6 +29,10 @@ impl Color {
         Self::new(0, 255, 0)
     }
 
+    pub fn dark_green() -> Self {
+        Self::new(0, 100, 0)
+    }
+
     pub fn blue() -> Self {
         Self::new(0, 0, 255)
     }

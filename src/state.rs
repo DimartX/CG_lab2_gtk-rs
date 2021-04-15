@@ -1,12 +1,6 @@
 use std::collections::HashMap;
 use gtk::prelude::*;
-
-pub enum View {
-    Isometric,
-    Side,
-    Above,
-    Front,
-}
+use crate::view::View;
 
 // Shared state for communication between buttons and drawingarea
 pub struct State {
@@ -20,12 +14,16 @@ pub struct State {
     pub rotateOy:  f64,
     pub rotateOz:  f64,
     pub zoom:      f64,
+    pub carcass:    bool,
+    pub hide_lines: bool,
+    pub filling:    bool,
     pub view:      View,
 }
 // And i really sorry about camel case
 
 impl State {
-    pub fn new(buttons: &HashMap<String, gtk::SpinButton>) -> Self {
+    pub fn new(buttons: &HashMap<String, gtk::SpinButton>,
+               switch: &HashMap<String, gtk::Switch>) -> Self {
         State {
             stretchOx: buttons.get("stretchOx").unwrap().get_value(),
             stretchOy: buttons.get("stretchOy").unwrap().get_value(),
@@ -37,6 +35,9 @@ impl State {
             rotateOy:  buttons.get("rotateOy") .unwrap().get_value(),
             rotateOz:  buttons.get("rotateOz") .unwrap().get_value(),
             zoom:      buttons.get("zoom")     .unwrap().get_value(),
+            carcass:   switch.get("carcass")   .unwrap().get_state(),
+            hide_lines:switch.get("hide_lines").unwrap().get_state(),
+            filling:   switch.get("filling")   .unwrap().get_state(),
             view:      View::Isometric,
         }
     }
