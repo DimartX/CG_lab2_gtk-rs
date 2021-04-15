@@ -28,7 +28,7 @@ pub struct Figure {
 }
 
 impl Figure {
-    pub fn newCube() -> Self {
+    pub fn new_cube() -> Self {
         Self {
             polygons: vec![
                 // front
@@ -89,7 +89,7 @@ impl Figure {
         }
     }
 
-    pub fn newAxes() -> Self {
+    pub fn new_axes() -> Self {
         Self {
             polygons: vec![
                 Polygon::from(
@@ -115,7 +115,7 @@ impl Figure {
         }
     }
 
-    pub fn drawAxes(&self, canvas: &mut CairoCanvas, pos: (i32, i32)) {
+    pub fn draw_axes(&self, canvas: &mut CairoCanvas, pos: (i32, i32)) {
         {
             let mut pts: Vec<Point> = Vec::new();
             canvas.set_draw_color(Color::red());
@@ -177,6 +177,15 @@ fn norm(vector: [f64; 4]) -> [f64; 4] {
     ]
 }
 
+fn maximum(a: f64, b: f64) -> f64{
+    if a > b {
+        a
+    }
+    else {
+        b
+    }
+}
+
 fn draw_tile(canvas: &mut CairoCanvas, pos: (i32, i32), polygon: &Polygon,
              hide_lines: bool, carcass: bool, filling: bool) {
     let mut pts: Vec<Point> = Vec::new();
@@ -187,7 +196,7 @@ fn draw_tile(canvas: &mut CairoCanvas, pos: (i32, i32), polygon: &Polygon,
         norm(polygon.points[2]),
     );
 
-    println!("Normal {:?}", normal);
+    //println!("Normal {:?}", normal);
 
     if hide_lines && normal[2] > 0.000001 {
         return;
@@ -200,9 +209,9 @@ fn draw_tile(canvas: &mut CairoCanvas, pos: (i32, i32), polygon: &Polygon,
     }
 
     if filling {
-        let alpha = angle_vectors(normal, [0.0, 0.0, -1.0, 0.0]) * 2.0 / 3.0;
-        println!("Alpha {}", alpha);
-        canvas.set_draw_color_alpha(Color::dark_green(), 1.0 - alpha);
+        let alpha = maximum(0.0, angle_vectors(normal, [0.0, 0.0, -1.0, 0.0]) * 2.0 / 3.0);
+        //println!("Alpha {}", alpha);
+        canvas.set_draw_color_alpha(Color::dark_green(), maximum(0.0, 1.0 - alpha));
         canvas.fill_polygon(&pts);
     }
 

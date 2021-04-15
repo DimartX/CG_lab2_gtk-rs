@@ -2,8 +2,9 @@ use gtk::prelude::*;
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::HashMap;
-use crate::state::State;
 use crate::view::View;
+use crate::state::State;
+use glib::clone;
 
 pub fn setup_buttons_events(
     buttons: &HashMap<String, gtk::SpinButton>,
@@ -174,7 +175,6 @@ pub fn setup_projection_events(
         projection.connect_changed(move |button| {
             let mut cur_state = button_state.borrow_mut();
             let area = drawing.borrow();
-
             cur_state.view =
                 match button.get_active_text().unwrap().as_str() {
                     "Side" => View::Side,
