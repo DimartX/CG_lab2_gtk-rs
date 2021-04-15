@@ -10,37 +10,48 @@ pub enum View {
 
 // Shared state for communication between buttons and drawingarea
 pub struct State {
-    pub moveFigureOx: i32,
-    pub moveFigureOy: i32,
-    pub moveFigureOz: i32,
-    pub rotateFigureOx: i32,
-    pub rotateFigureOy: i32,
-    pub rotateFigureOz: i32,
-    pub zoom: i32,
-    pub view: View,
+    pub stretchOx: f64,
+    pub stretchOy: f64,
+    pub stretchOz: f64,
+    pub moveOx:    f64,
+    pub moveOy:    f64,
+    pub moveOz:    f64,
+    pub rotateOx:  f64,
+    pub rotateOy:  f64,
+    pub rotateOz:  f64,
+    pub zoom:      f64,
+    pub view:      View,
 }
 // And i really sorry about camel case
 
 impl State {
     pub fn new(buttons: &HashMap<String, gtk::SpinButton>) -> Self {
         State {
-            moveFigureOx: buttons.get("moveFigureOx").unwrap().get_value_as_int(),
-            moveFigureOy: buttons.get("moveFigureOy").unwrap().get_value_as_int(),
-            moveFigureOz: buttons.get("moveFigureOz").unwrap().get_value_as_int(),
-            rotateFigureOx: buttons.get("rotateFigureOx").unwrap().get_value_as_int(),
-            rotateFigureOy: buttons.get("rotateFigureOy").unwrap().get_value_as_int(),
-            rotateFigureOz: buttons.get("rotateFigureOz").unwrap().get_value_as_int(),
-            zoom:          buttons.get("zoom").unwrap().get_value_as_int(),
+            stretchOx: buttons.get("stretchOx").unwrap().get_value(),
+            stretchOy: buttons.get("stretchOy").unwrap().get_value(),
+            stretchOz: buttons.get("stretchOz").unwrap().get_value(),
+            moveOx:    buttons.get("moveOx")   .unwrap().get_value(),
+            moveOy:    buttons.get("moveOy")   .unwrap().get_value(),
+            moveOz:    buttons.get("moveOz")   .unwrap().get_value(),
+            rotateOx:  buttons.get("rotateOx") .unwrap().get_value(),
+            rotateOy:  buttons.get("rotateOy") .unwrap().get_value(),
+            rotateOz:  buttons.get("rotateOz") .unwrap().get_value(),
+            zoom:      buttons.get("zoom")     .unwrap().get_value(),
+            view:      View::Isometric,
         }
     }
 
     pub fn default(&mut self) {
-        self.moveFigureOx = 0;
-        self.moveFigureOy = 0;
-        self.moveFigureOz = 0;
-        self.rotateFigureOx = 0;
-        self.rotateFigureOy = 0;
-        self.rotateFigureOz = 0;
-        self.zoom = 100;
+        self.stretchOx = 100.0;
+        self.stretchOy = 100.0;
+        self.stretchOz = 100.0;
+        self.moveOx    = 0.0;
+        self.moveOy    = 0.0;
+        self.moveOz    = 0.0;
+        self.rotateOx  = 0.0;
+        self.rotateOy  = 0.0;
+        self.rotateOz  = 0.0;
+        self.zoom    = 100.0;
+        self.view = View::Isometric;
     }
 }

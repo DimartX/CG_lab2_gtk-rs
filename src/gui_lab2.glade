@@ -3,11 +3,10 @@
 <interface>
   <requires lib="gtk+" version="3.24"/>
   <object class="GtkAdjustment" id="adjustment1">
-    <property name="lower">3</property>
-    <property name="upper">9999</property>
-    <property name="value">3</property>
-    <property name="step-increment">1</property>
-    <property name="page-increment">10</property>
+    <property name="lower">-999</property>
+    <property name="upper">999</property>
+    <property name="step-increment">10</property>
+    <property name="page-increment">50</property>
   </object>
   <object class="GtkAdjustment" id="adjustment10">
     <property name="upper">999</property>
@@ -33,38 +32,18 @@
     <property name="step-increment">10</property>
     <property name="page-increment">50</property>
   </object>
-  <object class="GtkAdjustment" id="adjustment4">
+  <object class="GtkAdjustment" id="adjustment41">
     <property name="upper">360</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
-  <object class="GtkAdjustment" id="adjustment5">
-    <property name="lower">1</property>
-    <property name="upper">999</property>
-    <property name="value">100</property>
-    <property name="step-increment">1</property>
-    <property name="page-increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment6">
-    <property name="lower">-999</property>
-    <property name="upper">999</property>
-    <property name="step-increment">10</property>
-    <property name="page-increment">50</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment7">
-    <property name="lower">-999</property>
-    <property name="upper">999</property>
-    <property name="step-increment">10</property>
-    <property name="page-increment">50</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment8">
+  <object class="GtkAdjustment" id="adjustment42">
     <property name="upper">360</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
-  <object class="GtkAdjustment" id="adjustment9">
-    <property name="upper">999</property>
-    <property name="value">100</property>
+  <object class="GtkAdjustment" id="adjustment43">
+    <property name="upper">360</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
@@ -121,7 +100,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Amount of points</property>
+                    <property name="label" translatable="yes">Move along Ox</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -133,7 +112,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Move along Ox</property>
+                    <property name="label" translatable="yes">Move along Oy</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -145,7 +124,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Move along Oy</property>
+                    <property name="label" translatable="yes">Move along Oz</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -157,7 +136,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Rotate figure</property>
+                    <property name="label" translatable="yes">Rotate Ox</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -169,7 +148,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Scale</property>
+                    <property name="label" translatable="yes">Rotate Oy</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -181,7 +160,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Scale Ox</property>
+                    <property name="label" translatable="yes">Rotate Oz</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -193,7 +172,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Scale Oy</property>
+                    <property name="label" translatable="yes">Stretch Ox</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -205,7 +184,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Zoom</property>
+                    <property name="label" translatable="yes">Stretch Oy</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -217,7 +196,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Move Ox axis</property>
+                    <property name="label" translatable="yes">Stretch Oz</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -229,7 +208,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Move Oy axis</property>
+                    <property name="label" translatable="yes">Zoom</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -238,16 +217,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Rotate axes</property>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">10</property>
-                  </packing>
+                  <placeholder/>
                 </child>
               </object>
               <packing>
@@ -263,15 +233,13 @@
                 <property name="spacing">20</property>
                 <property name="layout-style">center</property>
                 <child>
-                  <object class="GtkSpinButton" id="cntPoints">
+                  <object class="GtkSpinButton" id="moveOx">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="max-length">4</property>
                     <property name="width-chars">4</property>
                     <property name="text" translatable="yes">0</property>
-                    <property name="input-purpose">number</property>
                     <property name="adjustment">adjustment1</property>
-                    <property name="climb-rate">1</property>
                     <property name="numeric">True</property>
                   </object>
                   <packing>
@@ -281,7 +249,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSpinButton" id="moveFigureOx">
+                  <object class="GtkSpinButton" id="moveOy">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="max-length">4</property>
@@ -297,7 +265,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSpinButton" id="moveFigureOy">
+                  <object class="GtkSpinButton" id="moveOz">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="max-length">4</property>
@@ -313,13 +281,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSpinButton" id="rotateFigure">
+                  <object class="GtkSpinButton" id="rotateOx">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="max-length">3</property>
                     <property name="width-chars">4</property>
                     <property name="text" translatable="yes">0</property>
-                    <property name="adjustment">adjustment4</property>
+                    <property name="adjustment">adjustment41</property>
                     <property name="numeric">True</property>
                   </object>
                   <packing>
@@ -329,12 +297,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSpinButton" id="scale">
+                  <object class="GtkSpinButton" id="rotateOy">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="max-length">4</property>
+                    <property name="max-length">3</property>
                     <property name="width-chars">4</property>
-                    <property name="adjustment">adjustment9</property>
+                    <property name="text" translatable="yes">0</property>
+                    <property name="adjustment">adjustment42</property>
                     <property name="numeric">True</property>
                   </object>
                   <packing>
@@ -344,12 +313,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSpinButton" id="scaleOx">
+                  <object class="GtkSpinButton" id="rotateOz">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="max-length">4</property>
+                    <property name="max-length">3</property>
                     <property name="width-chars">4</property>
-                    <property name="adjustment">adjustment10</property>
+                    <property name="text" translatable="yes">0</property>
+                    <property name="adjustment">adjustment43</property>
                     <property name="numeric">True</property>
                   </object>
                   <packing>
@@ -359,13 +329,15 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSpinButton" id="scaleOy">
+                  <object class="GtkSpinButton" id="stretchOx">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="max-length">4</property>
                     <property name="width-chars">4</property>
-                    <property name="adjustment">adjustment11</property>
+                    <property name="text" translatable="yes">100</property>
+                    <property name="adjustment">adjustment9</property>
                     <property name="numeric">True</property>
+                    <property name="value">100</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -374,13 +346,15 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSpinButton" id="zoom">
+                  <object class="GtkSpinButton" id="stretchOy">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="max-length">4</property>
                     <property name="width-chars">4</property>
-                    <property name="adjustment">adjustment5</property>
+                    <property name="text" translatable="yes">100</property>
+                    <property name="adjustment">adjustment10</property>
                     <property name="numeric">True</property>
+                    <property name="value">100</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -389,14 +363,15 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSpinButton" id="moveAxisOx">
+                  <object class="GtkSpinButton" id="stretchOz">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="max-length">4</property>
                     <property name="width-chars">4</property>
-                    <property name="text" translatable="yes">0</property>
-                    <property name="adjustment">adjustment6</property>
+                    <property name="text" translatable="yes">100</property>
+                    <property name="adjustment">adjustment11</property>
                     <property name="numeric">True</property>
+                    <property name="value">100</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -405,14 +380,15 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSpinButton" id="moveAxisOy">
+                  <object class="GtkSpinButton" id="zoom">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="max-length">4</property>
                     <property name="width-chars">4</property>
-                    <property name="text" translatable="yes">0</property>
-                    <property name="adjustment">adjustment7</property>
+                    <property name="text" translatable="yes">1</property>
+                    <property name="adjustment">adjustment5</property>
                     <property name="numeric">True</property>
+                    <property name="value">1</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -421,20 +397,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSpinButton" id="rotateAxes">
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="max-length">3</property>
-                    <property name="width-chars">4</property>
-                    <property name="text" translatable="yes">0</property>
-                    <property name="adjustment">adjustment8</property>
-                    <property name="numeric">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">10</property>
-                  </packing>
+                  <placeholder/>
                 </child>
               </object>
               <packing>
@@ -450,5 +413,18 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkAdjustment" id="adjustment5">
+    <property name="lower">1</property>
+    <property name="upper">999</property>
+    <property name="value">100</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment9">
+    <property name="upper">999</property>
+    <property name="value">100</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
   </object>
 </interface>

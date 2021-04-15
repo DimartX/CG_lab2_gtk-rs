@@ -9,116 +9,111 @@ pub fn setup_buttons_events(
     state: &Rc<RefCell<State>>,
     drawing_area: &Rc<RefCell<gtk::DrawingArea>>,
 ) {
+
+    // 3 move buttons
     {
         let button_state = Rc::clone(&state);
         let drawing = Rc::clone(&drawing_area);
-        buttons.get("cntPoints").unwrap().connect_value_changed(move |spin_button| {
+        buttons.get("moveOx").unwrap().connect_value_changed(move |spin_button| {
             let mut cur_state = button_state.borrow_mut();
             let area = drawing.borrow();
-            cur_state.cntPoints = spin_button.get_value_as_int();
+            cur_state.moveOx = spin_button.get_value();
+            area.queue_draw();
+        });
+    }
+    {
+        let button_state = Rc::clone(&state);
+        let drawing = Rc::clone(&drawing_area);
+        buttons.get("moveOy").unwrap().connect_value_changed(move |spin_button| {
+            let mut cur_state = button_state.borrow_mut();
+            let area = drawing.borrow();
+            cur_state.moveOy = spin_button.get_value();
+            area.queue_draw();
+        });
+    }
+    {
+        let button_state = Rc::clone(&state);
+        let drawing = Rc::clone(&drawing_area);
+        buttons.get("moveOz").unwrap().connect_value_changed(move |spin_button| {
+            let mut cur_state = button_state.borrow_mut();
+            let area = drawing.borrow();
+            cur_state.moveOz = spin_button.get_value();
             area.queue_draw();
         });
     }
 
+    // 3 rotate buttons
     {
         let button_state = Rc::clone(&state);
         let drawing = Rc::clone(&drawing_area);
-        buttons.get("moveFigureOx").unwrap().connect_value_changed(move |spin_button| {
+        buttons.get("rotateOx").unwrap().connect_value_changed(move |spin_button| {
             let mut cur_state = button_state.borrow_mut();
             let area = drawing.borrow();
-            cur_state.moveFigureOx = spin_button.get_value_as_int();
+            cur_state.rotateOx = spin_button.get_value();
+            area.queue_draw();
+        });
+    }
+    {
+        let button_state = Rc::clone(&state);
+        let drawing = Rc::clone(&drawing_area);
+        buttons.get("rotateOy").unwrap().connect_value_changed(move |spin_button| {
+            let mut cur_state = button_state.borrow_mut();
+            let area = drawing.borrow();
+            cur_state.rotateOy = spin_button.get_value();
+            area.queue_draw();
+        });
+    }
+    {
+        let button_state = Rc::clone(&state);
+        let drawing = Rc::clone(&drawing_area);
+        buttons.get("rotateOz").unwrap().connect_value_changed(move |spin_button| {
+            let mut cur_state = button_state.borrow_mut();
+            let area = drawing.borrow();
+            cur_state.rotateOz = spin_button.get_value();
             area.queue_draw();
         });
     }
 
+    // 3 stretch buttons
     {
         let button_state = Rc::clone(&state);
         let drawing = Rc::clone(&drawing_area);
-        buttons.get("moveFigureOy").unwrap().connect_value_changed(move |spin_button| {
+        buttons.get("stretchOx").unwrap().connect_value_changed(move |spin_button| {
             let mut cur_state = button_state.borrow_mut();
             let area = drawing.borrow();
-            cur_state.moveFigureOy = spin_button.get_value_as_int();
+            cur_state.stretchOx = spin_button.get_value();
             area.queue_draw();
         });
     }
     {
         let button_state = Rc::clone(&state);
         let drawing = Rc::clone(&drawing_area);
-        buttons.get("rotateFigure").unwrap().connect_value_changed(move |spin_button| {
+        buttons.get("stretchOy").unwrap().connect_value_changed(move |spin_button| {
             let mut cur_state = button_state.borrow_mut();
             let area = drawing.borrow();
-            cur_state.rotateFigure = spin_button.get_value_as_int();
+            cur_state.stretchOy = spin_button.get_value();
             area.queue_draw();
         });
     }
     {
         let button_state = Rc::clone(&state);
         let drawing = Rc::clone(&drawing_area);
-        buttons.get("scale").unwrap().connect_value_changed(move |spin_button| {
+        buttons.get("stretchOz").unwrap().connect_value_changed(move |spin_button| {
             let mut cur_state = button_state.borrow_mut();
             let area = drawing.borrow();
-            cur_state.scale = spin_button.get_value_as_int();
-            area.queue_draw();
-        });
-    }
-    {
-        let button_state = Rc::clone(&state);
-        let drawing = Rc::clone(&drawing_area);
-        buttons.get("scaleOx").unwrap().connect_value_changed(move |spin_button| {
-            let mut cur_state = button_state.borrow_mut();
-            let area = drawing.borrow();
-            cur_state.scaleOx = spin_button.get_value_as_int();
-            area.queue_draw();
-        });
-    }
-    {
-        let button_state = Rc::clone(&state);
-        let drawing = Rc::clone(&drawing_area);
-        buttons.get("scaleOy").unwrap().connect_value_changed(move |spin_button| {
-            let mut cur_state = button_state.borrow_mut();
-            let area = drawing.borrow();
-            cur_state.scaleOy = spin_button.get_value_as_int();
+            cur_state.stretchOz = spin_button.get_value();
             area.queue_draw();
         });
     }
 
+    // zoom button
     {
         let button_state = Rc::clone(&state);
         let drawing = Rc::clone(&drawing_area);
         buttons.get("zoom").unwrap().connect_value_changed(move |spin_button| {
             let mut cur_state = button_state.borrow_mut();
             let area = drawing.borrow();
-            cur_state.zoom = spin_button.get_value_as_int();
-            area.queue_draw();
-        });
-    }
-    {
-        let button_state = Rc::clone(&state);
-        let drawing = Rc::clone(&drawing_area);
-        buttons.get("moveAxisOx").unwrap().connect_value_changed(move |spin_button| {
-            let mut cur_state = button_state.borrow_mut();
-            let area = drawing.borrow();
-            cur_state.moveAxisOx = spin_button.get_value_as_int();
-            area.queue_draw();
-        });
-    }
-        {
-        let button_state = Rc::clone(&state);
-        let drawing = Rc::clone(&drawing_area);
-        buttons.get("moveAxisOy").unwrap().connect_value_changed(move |spin_button| {
-            let mut cur_state = button_state.borrow_mut();
-            let area = drawing.borrow();
-            cur_state.moveAxisOy = spin_button.get_value_as_int();
-            area.queue_draw();
-        });
-    }
-    {
-        let button_state = Rc::clone(&state);
-        let drawing = Rc::clone(&drawing_area);
-        buttons.get("rotateAxes").unwrap().connect_value_changed(move |spin_button| {
-            let mut cur_state = button_state.borrow_mut();
-            let area = drawing.borrow();
-            cur_state.rotateAxes = spin_button.get_value_as_int();
+            cur_state.zoom = spin_button.get_value();
             area.queue_draw();
         });
     }

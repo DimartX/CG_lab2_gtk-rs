@@ -10,12 +10,12 @@ use std;
 
 mod canvas;
 mod color;
-mod cube;
 mod point;
+mod cube;
 mod state;
 mod buttons_events;
 mod handle_draw;
-use crate::cube::Cube;
+mod transformations;
 use crate::canvas::{CairoCanvas, Canvas};
 use crate::state::State;
 
@@ -31,9 +31,9 @@ fn build_ui(app: &gtk::Application) {
 
     // Get handles for all the buttons.
     let mut buttons: HashMap<String, gtk::SpinButton> = HashMap::new();
-    for name in &["cntPoints", "moveFigureOx", "moveFigureOy", "rotateFigure",
-                  "scale", "scaleOx", "scaleOy",
-                  "zoom", "moveAxisOx", "moveAxisOy", "rotateAxes"] {
+    for name in &["moveOx", "moveOy", "moveOz",
+                  "stretchOx", "stretchOy", "stretchOz",
+                  "zoom", "rotateOx", "rotateOy", "rotateOz"] {
         buttons.insert(name.to_string(), builder.get_object(name)
                        .expect(&format!("Couldn't get button {}", name)));
     }
@@ -66,9 +66,7 @@ fn setup_canvas_area(
 
         let cur_draw_state = draw_state.borrow();
 
-        let mut cube: Cube = Cube::new(&canvas);
-
-        crate::handle_draw::handle_draw(&mut canvas, &mut cube, &cur_draw_state);
+        crate::handle_draw::handle_draw(&mut canvas, &cur_draw_state);
 
         Inhibit(false)
     });
