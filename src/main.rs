@@ -13,7 +13,7 @@ mod canvas;
 mod view;
 mod color;
 mod point;
-mod cube;
+mod figure;
 mod state;
 mod buttons_events;
 mod handle_draw;

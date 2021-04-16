@@ -1,4 +1,4 @@
-use crate::cube::{FigureImpl, Figure};
+use crate::figure::{FigureImpl, Figure};
 use crate::state::State;
 use crate::canvas::{CairoCanvas, Canvas};
 use crate::transformations::TransformMatrix;
@@ -46,15 +46,15 @@ pub fn handle_draw(canvas: &mut CairoCanvas, state: &Ref<State>) {
         },
         View::Above => {
             cube_transformation = cube_transformation
-                .rotate_ox(to_radians(-90.0));
+                .rotate_ox(to_radians(90.0));
             axes_transformation = axes_transformation
-                .rotate_ox(to_radians(-90.0));
+                .rotate_ox(to_radians(90.0));
         },
         View::Side => {
             cube_transformation = cube_transformation
-                .rotate_oy(to_radians(90.0));
+                .rotate_oz(to_radians(90.0));
             axes_transformation = axes_transformation
-                .rotate_oy(to_radians(90.0));
+                .rotate_oz(to_radians(90.0));
         }
     }
 

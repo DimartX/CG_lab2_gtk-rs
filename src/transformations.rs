@@ -69,7 +69,7 @@ impl TransformMatrix {
         }
     }
 
-    pub fn rotate_oy(&mut self, angle: f64) -> Self {
+    pub fn rotate_oz(&mut self, angle: f64) -> Self {
         Self {
             mtx: multiply(
                 self.mtx,
@@ -83,7 +83,7 @@ impl TransformMatrix {
         }
     }
 
-    pub fn rotate_oz(&mut self, angle: f64) -> Self {
+    pub fn rotate_oy(&mut self, angle: f64) -> Self {
         Self {
             mtx: multiply(
                 self.mtx,
