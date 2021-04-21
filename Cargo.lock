@@ -392,6 +392,7 @@ name = "lab2"
 version = "0.1.0"
 dependencies = [
  "cairo-rs",
+ "gdk",
  "gio",
  "glib",
  "gtk",

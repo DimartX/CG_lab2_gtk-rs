@@ -18,6 +18,8 @@ pub struct State {
     pub hide_lines: bool,
     pub filling:    bool,
     pub view:      View,
+    pub mouse_x:   f64,
+    pub mouse_y:   f64,
 }
 // And i really sorry about camel case
 
@@ -39,6 +41,8 @@ impl State {
             hide_lines:switch.get("hide_lines").unwrap().get_state(),
             filling:   switch.get("filling")   .unwrap().get_state(),
             view:      View::Isometric,
+            mouse_x:   0.0,
+            mouse_y:   0.0,
         }
     }
 

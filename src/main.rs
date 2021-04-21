@@ -20,6 +20,7 @@ mod handle_draw;
 mod transformations;
 use crate::canvas::{CairoCanvas, Canvas};
 use crate::state::State;
+use gdk::EventMask;
 
 fn build_ui(app: &gtk::Application) {
     // Initialize the UI with Glade XML.
@@ -84,6 +85,60 @@ fn setup_canvas_area(
 
         Inhibit(false)
     });
+
+
+    {
+        let drawing_area_cloned = Rc::clone(&drawing_area);
+        let drawing = drawing_area_cloned.borrow();
+        drawing.add_events(
+            EventMask::BUTTON_MOTION_MASK |
+            EventMask::BUTTON_PRESS_MASK |
+            EventMask::BUTTON_RELEASE_MASK
+        );
+    }
+
+    {
+        let button_state = Rc::clone(&state);
+        let drawing_area_cloned = Rc::clone(&drawing_area);
+        let drawing = drawing_area_cloned.borrow();
+        drawing.connect_button_press_event(move |_, event| {
+            let mut state = button_state.borrow_mut();
+            let (x, y) = event.get_position();
+            state.mouse_x = x;
+            state.mouse_y = y;
+            Inhibit(false)
+        });
+    }
+
+    {
+        let button_state = Rc::clone(&state);
+        let drawing_area_cloned = Rc::clone(&drawing_area);
+        let drawing = drawing_area_cloned.borrow();
+        drawing.connect_button_release_event(move |area, _| {
+            let mut state = button_state.borrow_mut();
+
+            area.queue_draw();
+            Inhibit(false)
+        });
+    }
+
+    {
+        let button_state = Rc::clone(&state);
+        let drawing_area_cloned = Rc::clone(&drawing_area);
+        let drawing = drawing_area_cloned.borrow();
+        drawing.connect_motion_notify_event(move |area, event| {
+            let mut state = button_state.borrow_mut();
+            let (x, y) = event.get_position();
+            state.rotateOz -= (x - state.mouse_x) / 10.0;
+            state.rotateOx += (y - state.mouse_y) / 10.0;
+            state.mouse_x = x;
+            state.mouse_y = y;
+            println!("({}, {})", x, y);
+
+            area.queue_draw();
+            Inhibit(false)
+        });
+    }
 }
 
 fn main() {
